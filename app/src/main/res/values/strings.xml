@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Yi</string>
+
+    <!-- YIM 会话 -->
+    <string name="yim_chat_tab">YIM</string>
+
+    <!-- YIM 联系人 -->
+    <string name="yim_contact_tab">联系人</string>
+
+    <!-- YIM 发现 -->
+    <string name="yim_discovery_tab">发现</string>
+
+    <!-- YIM 我的 -->
+    <string name="yim_setting_tab">我的</string>
+</resources>
