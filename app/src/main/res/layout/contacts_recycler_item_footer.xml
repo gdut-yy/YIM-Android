@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/module_center_background_color">
+
+    <TextView
+        android:id="@+id/tv_contact_foot"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:textColor="@color/module_option_item_content_color"
+        android:gravity="center"
+        tools:text="N位联系人" />
+
+</LinearLayout>

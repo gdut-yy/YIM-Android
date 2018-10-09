@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/module_option_item_normal_color"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_contact_section"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/module_center_background_color"
+        android:gravity="center_vertical"
+        android:paddingEnd="10dp"
+        android:paddingStart="10dp"
+        android:textColor="@color/module_option_item_name_color"
+        android:textSize="14sp"
+        tools:text="A" />
+
+    <LinearLayout
+        android:id="@+id/ll_item"
+        style="@style/contactsView_layout">
+
+        <ImageView
+            android:id="@+id/iv_contact_img"
+            style="@style/contactsView_image"
+            android:src="@drawable/head_me" />
+
+        <TextView
+            android:id="@+id/tv_contact_name"
+            style="@style/contactsView_text"
+            tools:text="zyy" />
+
+    </LinearLayout>
+
+    <View style="@style/ui_line" />
+
+</LinearLayout>

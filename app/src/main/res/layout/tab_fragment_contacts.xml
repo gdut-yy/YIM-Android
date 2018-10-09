@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/module_center_background_color"
+    tools:context=".view.TabContactsFragment">
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_contact"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <net.devyy.yi.view.ContactsSlideBar
+        android:id="@+id/slidebar_contact"
+        android:layout_width="25dp"
+        android:layout_height="match_parent"
+        android:layout_alignParentEnd="true" />
+
+    <!--字母对话框-->
+    <TextView
+        android:id="@+id/tv_letter"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_centerInParent="true"
+        android:background="@color/module_option_item_pressed_color"
+        android:gravity="center"
+        android:textColor="@color/module_option_item_normal_color"
+        android:textSize="40sp"
+        android:visibility="gone"
+        tools:text="A" />
+
+</RelativeLayout>

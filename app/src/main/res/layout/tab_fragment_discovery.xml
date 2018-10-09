@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/module_center_background_color"
+    android:orientation="vertical"
+    tools:context=".view.TabDiscoveryFragment">
+
+    <!-- 朋友圈 -->
+    <LinearLayout
+        android:id="@+id/ll_pengyouquan"
+        style="@style/optionItems_layout"
+        android:layout_marginTop="15dp">
+
+        <ImageView
+            style="@style/optionItems_image"
+            android:src="@drawable/ic_pengyouquan" />
+
+        <TextView
+            style="@style/optionItems_text"
+            android:text="@string/text_pengyouquan" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- 扫一扫 -->
+        <LinearLayout
+            android:id="@+id/ll_saoyisao"
+            style="@style/optionItems_layout"
+            android:layout_marginTop="15dp">
+
+            <ImageView
+                style="@style/optionItems_image"
+                android:src="@drawable/ic_saoyisao" />
+
+            <TextView
+                style="@style/optionItems_text"
+                android:text="@string/text_saoyisao" />
+
+        </LinearLayout>
+
+        <View style="@style/ui_line" />
+
+        <!-- 摇一摇 -->
+        <LinearLayout
+            android:id="@+id/ll_yaoyiyao"
+            style="@style/optionItems_layout">
+
+            <ImageView
+                style="@style/optionItems_image"
+                android:src="@drawable/ic_yaoyiyao" />
+
+            <TextView
+                style="@style/optionItems_text"
+                android:text="@string/text_yaoyiyao" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- 看一看 -->
+        <LinearLayout
+            android:id="@+id/ll_kanyikan"
+            style="@style/optionItems_layout"
+            android:layout_marginTop="15dp">
+
+            <ImageView
+                style="@style/optionItems_image"
+                android:src="@drawable/ic_kanyikan" />
+
+            <TextView
+                style="@style/optionItems_text"
+                android:text="@string/text_kanyikan" />
+
+        </LinearLayout>
+
+        <View style="@style/ui_line" />
+
+        <!-- 搜一搜 -->
+        <LinearLayout
+            android:id="@+id/ll_souyisou"
+            style="@style/optionItems_layout">
+
+            <ImageView
+                style="@style/optionItems_image"
+                android:src="@drawable/ic_souyisou" />
+
+            <TextView
+                style="@style/optionItems_text"
+                android:text="@string/text_souyisou" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+
+    <!-- 附近的人 -->
+    <LinearLayout
+        android:id="@+id/ll_fujinderen"
+        style="@style/optionItems_layout"
+        android:layout_marginTop="15dp">
+
+        <ImageView
+            style="@style/optionItems_image"
+            android:src="@drawable/ic_fujinderen" />
+
+        <TextView
+            style="@style/optionItems_text"
+            android:text="@string/text_fujinderen" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- 购物 -->
+        <LinearLayout
+            android:id="@+id/ll_gouwu"
+            style="@style/optionItems_layout"
+            android:layout_marginTop="15dp">
+
+            <ImageView
+                style="@style/optionItems_image"
+                android:src="@drawable/ic_gouwu" />
+
+            <TextView
+                style="@style/optionItems_text"
+                android:text="@string/text_gouwu" />
+
+        </LinearLayout>
+
+        <View style="@style/ui_line" />
+
+        <!-- 游戏 -->
+        <LinearLayout
+            android:id="@+id/ll_youxi"
+            style="@style/optionItems_layout">
+
+            <ImageView
+                style="@style/optionItems_image"
+                android:src="@drawable/ic_youxi" />
+
+            <TextView
+                style="@style/optionItems_text"
+                android:text="@string/text_youxi" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+
+    <!-- 小程序 -->
+    <LinearLayout
+        android:id="@+id/ll_xiaochengxu"
+        style="@style/optionItems_layout"
+        android:layout_marginTop="15dp">
+
+        <ImageView
+            style="@style/optionItems_image"
+            android:src="@drawable/ic_xiaochengxu" />
+
+        <TextView
+            style="@style/optionItems_text"
+            android:text="@string/text_xiaochengxu" />
+
+    </LinearLayout>
+
+</LinearLayout>

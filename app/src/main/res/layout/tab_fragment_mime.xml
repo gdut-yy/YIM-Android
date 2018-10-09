@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/module_center_background_color"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/llMyInfo"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_marginTop="15dp"
+        android:background="@color/module_option_item_normal_color"
+        android:gravity="center_vertical">
+
+        <ImageView
+            android:id="@+id/ivHeader"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginStart="10dp"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/ic_head" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="80dp"
+            android:layout_weight="1"
+            android:background="@color/module_option_item_normal_color"
+            android:gravity="center_vertical"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:singleLine="true"
+                android:text="张逸扬"
+                android:textColor="@color/module_option_item_name_color"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tvAccount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:singleLine="true"
+                android:text="微信号：qq461625996"
+                android:textColor="@color/module_option_item_content_color"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/ivQRCordCard"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginEnd="15dp"
+            android:src="@mipmap/ic_qr_code" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- 钱包 -->
+        <LinearLayout
+            android:id="@+id/ll_qianbao"
+            style="@style/optionItems_layout"
+            android:layout_marginTop="15dp">
+
+            <ImageView
+                style="@style/optionItems_image"
+                android:src="@drawable/ic_qianbao" />
+
+            <TextView
+                style="@style/optionItems_text"
+                android:text="@string/text_qianbao" />
+
+        </LinearLayout>
+
+        <!--收藏-->
+        <LinearLayout
+            android:id="@+id/ll_shoucang"
+            style="@style/optionItems_layout"
+            android:layout_marginTop="15dp">
+
+            <ImageView
+                style="@style/optionItems_image"
+                android:src="@drawable/ic_shoucang" />
+
+            <TextView
+                style="@style/optionItems_text"
+                android:text="@string/text_shoucang" />
+
+        </LinearLayout>
+
+        <View style="@style/ui_line" />
+
+        <!-- 相册 -->
+        <LinearLayout
+            android:id="@+id/ll_xiangce"
+            style="@style/optionItems_layout">
+
+            <ImageView
+                style="@style/optionItems_image"
+                android:src="@drawable/ic_xiangce" />
+
+            <TextView
+                style="@style/optionItems_text"
+                android:text="@string/text_xiangce" />
+
+        </LinearLayout>
+
+        <View style="@style/ui_line" />
+
+        <!-- 卡包 -->
+        <LinearLayout
+            android:id="@+id/ll_kabao"
+            style="@style/optionItems_layout">
+
+            <ImageView
+                style="@style/optionItems_image"
+                android:src="@drawable/ic_kabao" />
+
+            <TextView
+                style="@style/optionItems_text"
+                android:text="@string/text_kabao" />
+
+        </LinearLayout>
+
+        <View style="@style/ui_line" />
+
+        <!-- 表情 -->
+        <LinearLayout
+            android:id="@+id/ll_biaoqing"
+            style="@style/optionItems_layout">
+
+            <ImageView
+                style="@style/optionItems_image"
+                android:src="@drawable/ic_biaoqing" />
+
+            <TextView
+                style="@style/optionItems_text"
+                android:text="@string/text_biaoqing" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+
+    <!-- 设置 -->
+    <LinearLayout
+        android:id="@+id/ll_shezhi"
+        style="@style/optionItems_layout"
+        android:layout_marginTop="15dp">
+
+        <ImageView
+            style="@style/optionItems_image"
+            android:src="@drawable/ic_shezhi" />
+
+        <TextView
+            style="@style/optionItems_text"
+            android:text="@string/text_shezhi" />
+
+    </LinearLayout>
+
+    <!-- csdn -->
+    <LinearLayout
+        android:id="@+id/ll_csdn"
+        style="@style/optionItems_layout"
+        android:layout_marginTop="15dp">
+
+        <ImageView
+            style="@style/optionItems_image"
+            android:src="@drawable/ic_csdn" />
+
+        <TextView
+            style="@style/optionItems_text"
+            android:text="@string/text_csdn" />
+
+    </LinearLayout>
+
+    <View style="@style/ui_line" />
+
+    <!-- gitee -->
+    <LinearLayout
+        android:id="@+id/ll_gitee"
+        style="@style/optionItems_layout">
+
+        <ImageView
+            style="@style/optionItems_image"
+            android:src="@drawable/ic_gitee" />
+
+        <TextView
+            style="@style/optionItems_text"
+            android:text="@string/text_gitee" />
+
+    </LinearLayout>
+
+    <View style="@style/ui_line" />
+
+    <!-- github -->
+    <LinearLayout
+        android:id="@+id/ll_github"
+        style="@style/optionItems_layout">
+
+        <ImageView
+            style="@style/optionItems_image"
+            android:src="@drawable/ic_github" />
+
+        <TextView
+            style="@style/optionItems_text"
+            android:text="@string/text_github" />
+
+    </LinearLayout>
+
+
+</LinearLayout>

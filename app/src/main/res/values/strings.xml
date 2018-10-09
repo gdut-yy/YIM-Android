@@ -1,15 +1,63 @@
 <resources>
-    <string name="app_name">Yi</string>
+    <string name="app_name">YIM</string>
 
-    <!-- YIM 会话 -->
+    <!-- 菜单栏 -->
+    <string name="menu_add">add</string>
+    <string name="menu_search">search</string>
+    <string name="menu_faqiqunliao">发起群聊</string>
+    <string name="menu_tianjiapengyou">添加朋友</string>
+    <string name="menu_saoyisao">扫一扫</string>
+    <string name="menu_shoufukuan">收付款</string>
+    <string name="menu_bangzhu">帮助与反馈</string>
+
+    <!-- YIM “YIM” -->
     <string name="yim_chat_tab">YIM</string>
 
-    <!-- YIM 联系人 -->
+    <!-- YIM “联系人” -->
     <string name="yim_contact_tab">联系人</string>
+    <string name="text_xindepengyou">新的朋友</string>
+    <string name="text_qunliao">群聊</string>
+    <string name="text_biaoqian">标签</string>
+    <string name="text_gongzhonghao">公众号</string>
 
-    <!-- YIM 发现 -->
+    <!-- YIM “发现” -->
     <string name="yim_discovery_tab">发现</string>
+    <string name="text_pengyouquan">朋友圈</string>
+    <string name="text_saoyisao">扫一扫</string>
+    <string name="text_yaoyiyao">摇一摇</string>
+    <string name="text_kanyikan">看一看</string>
+    <string name="text_souyisou">搜一搜</string>
+    <string name="text_fujinderen">附近的人</string>
+    <string name="text_gouwu">购物</string>
+    <string name="text_youxi">游戏</string>
+    <string name="text_xiaochengxu">小程序</string>
 
-    <!-- YIM 我的 -->
-    <string name="yim_setting_tab">我的</string>
+    <!-- YIM “我的” -->
+    <string name="yim_mime_tab">我的</string>
+    <string name="text_qianbao">钱包</string>
+    <string name="text_shoucang">收藏</string>
+    <string name="text_xiangce">相册</string>
+    <string name="text_kabao">卡包</string>
+    <string name="text_biaoqing">表情</string>
+    <string name="text_shezhi">设置</string>
+
+    <string name="text_csdn">CSDN</string>
+    <string name="text_gitee">码云</string>
+    <string name="text_github">GitHub</string>
+
+
+    <!-- 设置 -->
+    <string name="setting_1">账号与安全</string>
+    <string name="setting_2">新消息提醒</string>
+    <string name="setting_3">勿扰模式</string>
+    <string name="setting_4">聊天</string>
+    <string name="setting_5">隐私</string>
+    <string name="setting_6">通用</string>
+    <string name="setting_7">关于微信</string>
+    <string name="setting_8">帮助与反馈</string>
+    <string name="setting_9">插件</string>
+    <string name="setting_10">切换账号</string>
+    <string name="setting_11">退出</string>
+
+
 </resources>

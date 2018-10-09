@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- #RRGGBB 格式（使用 ps 直接取样色）-->
+    <color name="dark_green_color">#3C4E34</color>
+
+    <!-- App 通用 顶部、中部、底部、子菜单 -->
+    <color name="module_top_bar_background_color">#303030</color>
+    <color name="module_top_bar_text_color">#FFFFFF</color>
+    <color name="module_menu_item_normal_color">#393A3F</color>
+    <color name="module_menu_item_pressed_color">#2F3336</color>
+    <color name="module_menu_item_text_color">#FFFFFF</color>
+    <color name="module_menu_item_line_color">#191B1C</color>
+    <color name="module_center_background_color">#EBEBEB</color>
+    <color name="module_bottom_bar_background_color">#FCFCFC</color>
+    <color name="module_bottom_bar_text_color">#999999</color>
+    <color name="module_bottom_bar_pressed_color">#46C01B</color>
+
+    <!-- App 通用 OptionItem 子项 -->
+    <color name="module_option_item_line_color">#D7D7D7</color>
+    <color name="module_option_item_name_color">#353535</color>
+    <color name="module_option_item_content_color">#A9A9A9</color>
+    <color name="module_option_item_normal_color">#FFFFFF</color>
+    <color name="module_option_item_pressed_color">#BFBFBF</color>
+
+    <!-- 快速索引bar 颜色-->
+    <color name="module_slide_bar_text_color">#4A4A4A</color>
+    <color name="module_slide_bar_pressed_color">#BFBFBF</color>
+    
+    <!-- 详细资料 -->
+    <color name="module_detail_send_btn_normal_color">#1AAD19</color>
+    <color name="module_detail_video_btn_normal_color">#F8F8F8</color>
+    <color name="module_detail_text_color">#181818</color>
+
+    <!-- 聊天页面 -->
+    <color name="module_chat_line_color">#D8D8D8</color>
+    <color name="module_chat_bottom_bar_color">#F4F4F4</color>
+
+
+</resources>

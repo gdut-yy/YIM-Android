@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout style="@style/contactsView_layout">
+
+        <ImageView
+            android:id="@+id/iv_contact_header1"
+            style="@style/contactsView_image"
+            android:src="@drawable/ic_xindepengyou" />
+
+        <TextView
+            android:id="@+id/tv_contact_header1"
+            style="@style/contactsView_text"
+            android:text="@string/text_xindepengyou" />
+
+    </LinearLayout>
+
+    <View style="@style/ui_line" />
+
+    <LinearLayout style="@style/contactsView_layout">
+
+        <ImageView
+            android:id="@+id/iv_contact_header2"
+            style="@style/contactsView_image"
+            android:src="@drawable/ic_qunliao" />
+
+        <TextView
+            android:id="@+id/tv_contact_header2"
+            style="@style/contactsView_text"
+            android:text="@string/text_qunliao" />
+
+    </LinearLayout>
+
+    <View style="@style/ui_line" />
+
+    <LinearLayout style="@style/contactsView_layout">
+
+        <ImageView
+            android:id="@+id/iv_contact_header3"
+            style="@style/contactsView_image"
+            android:src="@drawable/ic_biaoqian" />
+
+        <TextView
+            android:id="@+id/tv_contact_header3"
+            style="@style/contactsView_text"
+            android:text="@string/text_biaoqian" />
+
+    </LinearLayout>
+
+    <View style="@style/ui_line" />
+
+    <LinearLayout style="@style/contactsView_layout">
+
+        <ImageView
+            android:id="@+id/iv_contact_header4"
+            style="@style/contactsView_image"
+            android:src="@drawable/ic_gongzhonghao" />
+
+        <TextView
+            android:id="@+id/tv_contact_header4"
+            style="@style/contactsView_text"
+            android:text="@string/text_gongzhonghao" />
+
+    </LinearLayout>
+</LinearLayout>

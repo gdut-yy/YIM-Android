@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/module_center_background_color"
+    tools:context=".view.activity.ChatActivity">
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_chat_content"
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/chat_line" />
+
+    <View
+        android:id="@+id/chat_line"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/module_chat_line_color"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout2" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/module_chat_bottom_bar_color"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <ImageView
+            android:id="@+id/iv_chat_voice"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="5dp"
+            android:src="@drawable/chat_voice" />
+
+        <EditText
+            android:id="@+id/et_chat_input"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
+        <ImageView
+            android:id="@+id/iv_chat_emoji"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_margin="5dp"
+            android:src="@drawable/chat_emoji" />
+
+        <ImageView
+            android:id="@+id/iv_chat_more"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="5dp"
+            android:src="@drawable/chat_more"
+            android:visibility="visible" />
+
+        <Button
+            android:id="@+id/btn_chat_send"
+            android:layout_width="50dp"
+            android:layout_height="35dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="10dp"
+            android:background="@color/module_detail_send_btn_normal_color"
+            android:text="发送"
+            android:textColor="@color/module_option_item_normal_color"
+            android:visibility="gone" />
+    </LinearLayout>
+
+</LinearLayout>

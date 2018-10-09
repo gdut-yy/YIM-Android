@@ -8,4 +8,136 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+
+    <!-- 子菜单 LinearLayout 格式抽取 -->
+    <style name="menuItems_layout">
+        <item name="android:clickable">true</item>
+        <item name="android:background">@drawable/module_menu_items</item>
+        <item name="android:layout_width">200dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:orientation">horizontal</item>
+    </style>
+    <!-- 子菜单 ImageView 格式抽取 -->
+    <style name="menuItems_image">
+        <item name="android:layout_width">25dp</item>
+        <item name="android:layout_height">25dp</item>
+        <item name="android:layout_marginTop">10dp</item>
+        <item name="android:layout_marginBottom">10dp</item>
+        <item name="android:layout_marginStart">15dp</item>
+        <item name="android:layout_marginEnd">15dp</item>
+    </style>
+    <!-- 子菜单 TextView 格式抽取 -->
+    <style name="menuItems_text">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:textColor">@color/module_menu_item_text_color</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:gravity">center_vertical</item>
+    </style>
+
+    <!-- “联系人” 页面 LinearLayout 格式抽取 -->
+    <style name="contactsView_layout">
+        <item name="android:clickable">true</item>
+        <item name="android:background">@drawable/module_option_items</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:paddingStart">10dp</item>
+        <item name="android:paddingEnd">10dp</item>
+        <item name="android:paddingTop">5dp</item>
+        <item name="android:paddingBottom">5dp</item>
+    </style>
+    <!-- “联系人” 页面 ImageView 格式抽取 -->
+    <style name="contactsView_image">
+        <item name="android:layout_height">40dp</item>
+        <item name="android:layout_width">40dp</item>
+        <item name="android:scaleType">centerCrop</item>
+    </style>
+    <!-- “联系人” 页面 TextView 格式抽取 -->
+    <style name="contactsView_text">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:layout_marginStart">15dp</item>
+        <item name="android:textColor">@color/module_slide_bar_text_color</item>
+    </style>
+
+
+    <!-- “发现” 和 “我的” 页面 LinearLayout 格式抽取 -->
+    <style name="optionItems_layout">
+        <item name="android:background">@drawable/module_option_items</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">40dp</item>
+        <item name="android:clickable">true</item>
+        <item name="android:gravity">center</item>
+        <item name="android:orientation">horizontal</item>
+    </style>
+    <!-- “发现” 和 “我的” 页面 ImageView 格式抽取 -->
+    <style name="optionItems_image">
+        <item name="android:layout_width">20dp</item>
+        <item name="android:layout_height">20dp</item>
+        <item name="android:layout_marginStart">15dp</item>
+        <item name="android:layout_marginEnd">15dp</item>
+        <item name="android:scaleType">centerCrop</item>
+    </style>
+    <!-- “发现” 和 “我的” 页面 TextView 格式抽取 -->
+    <style name="optionItems_text">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:textColor">@color/module_option_item_name_color</item>
+    </style>
+
+    <!-- “联系人”、“发现” 和 “我的” 页面 分隔线 格式抽取 -->
+    <style name="ui_line">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">0.6dp</item>
+        <item name="android:layout_marginStart">10dp</item>
+        <item name="android:layout_marginEnd">10dp</item>
+        <item name="android:background">@color/module_option_item_line_color</item>
+    </style>
+
+
+
+    <!-- 设置子项 -->
+    <style name="setting_item">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@drawable/module_option_items</item>
+        <item name="android:clickable">true</item>
+        <item name="android:padding">10dp</item>
+        <item name="android:textColor">@color/module_option_item_name_color</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <!-- 第三方登录注册样式 -->
+    <style name="horizontal_slide" parent="android:Theme.NoTitleBar">
+        <item name="android:windowAnimationStyle">@style/AnimFade2</item>
+    </style>
+    <style name="AnimFade2" parent="@android:style/Animation.Activity">
+        <item name="android:activityOpenEnterAnimation">@anim/slide_in_from_right</item>
+        <item name="android:activityOpenExitAnimation">@anim/slide_out_to_left</item>
+        <item name="android:activityCloseExitAnimation">@anim/slide_out_to_right</item>
+        <item name="android:activityCloseEnterAnimation">@anim/slide_in_from_left</item>
+    </style>
+
+    <!--启动界面主题-->
+    <style name="App.Theme.Launch" parent="Base.App.Theme">
+        <item name="android:windowBackground">@mipmap/yi_splash2160_1080</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
+
+    <style name="Base.App.Theme" parent="Base.App.Theme.Light">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+    <!--base theme light-->
+    <style name="Base.App.Theme.Light" parent="@style/Theme.AppCompat.Light"/>
+
+
+
 </resources>
