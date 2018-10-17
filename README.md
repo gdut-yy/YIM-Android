@@ -2,8 +2,8 @@
 
 ![](readme/ic_yim.png)
 
-## Yi v1.0.0
-Yi 是本人独立开发的一款仿微信的即时通讯应用，仅为个人学习所用。
+## YIM v1.0.1
+YIM 是本人基于即时通讯（IM）技术开发的移动端应用。项目设计目标为参考WeChat客户端的架构，实现简单登录、注册、登出功能；实现基本文本传输、语音传输、图片传输、文件传输等功能；实现好友系统、单聊（C2C）、群聊（C2G）等功能。，仅供个人学习所用。
 
 ## 应用截图
 
@@ -17,6 +17,7 @@ Yi 是本人独立开发的一款仿微信的即时通讯应用，仅为个人�
 | 序号 | 版本号 | 说明 |
 | :-: | :-: | - |
 | 1 | v1.0.0 | 专业设计提交版本 |
+| 2 | v1.0.1 | 新增聊天界面 Emoticon 模块、Toolbar 模块 |
 
 ## 最新版开发环境
 
@@ -36,6 +37,8 @@ Yi 是本人独立开发的一款仿微信的即时通讯应用，仅为个人�
     // Optional compile for GCM (Google Cloud Messaging).
     implementation 'com.google.android.gms:play-services-gcm:10.2.1'
     implementation 'com.hyphenate:hyphenate-sdk:3.3.0'
+	// glide
+    implementation 'com.github.bumptech.glide:glide:3.7.0'
 
 ## UI 素材
 

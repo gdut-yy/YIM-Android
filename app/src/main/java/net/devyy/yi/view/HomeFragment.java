@@ -119,8 +119,8 @@ public class HomeFragment extends Fragment {
         bottomNavigationBar.setMode(BottomNavigationBar.MODE_FIXED);
 //        bottomNavigationBar.setBackgroundStyle(BottomNavigationBar.BACKGROUND_STYLE_STATIC);
 //        bottomNavigationBar.setBackgroundStyle(BottomNavigationBar.BACKGROUND_STYLE_RIPPLE);
-        bottomNavigationBar.setBarBackgroundColor(R.color.module_bottom_bar_background_color);
-        bottomNavigationBar.setInActiveColor(R.color.module_bottom_bar_text_color).setActiveColor(R.color.module_bottom_bar_pressed_color);
+        bottomNavigationBar.setBarBackgroundColor(R.color.bottom_bar_background_color);
+        bottomNavigationBar.setInActiveColor(R.color.bottom_bar_normal_color).setActiveColor(R.color.bottom_bar_pressed_color);
         bottomNavigationBar
 //                .addItem(new BottomNavigationItem(R.drawable.ic_chat_tab, R.string.yim_chat_tab).setActiveColorResource(R.color.module_bottom_bar_pressed_color).setBadgeItem(textBadgeItem))
                 .addItem(tab1)

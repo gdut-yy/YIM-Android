@@ -30,7 +30,7 @@
     <style name="menuItems_text">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">match_parent</item>
-        <item name="android:textColor">@color/module_menu_item_text_color</item>
+        <item name="android:textColor">@color/submenu_item_text_color</item>
         <item name="android:textSize">15sp</item>
         <item name="android:gravity">center_vertical</item>
     </style>
@@ -87,7 +87,7 @@
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_weight">1</item>
-        <item name="android:textColor">@color/module_option_item_name_color</item>
+        <item name="android:textColor">@color/option_item_name_color</item>
     </style>
 
     <!-- “联系人”、“发现” 和 “我的” 页面 分隔线 格式抽取 -->
@@ -96,7 +96,7 @@
         <item name="android:layout_height">0.6dp</item>
         <item name="android:layout_marginStart">10dp</item>
         <item name="android:layout_marginEnd">10dp</item>
-        <item name="android:background">@color/module_option_item_line_color</item>
+        <item name="android:background">@color/option_item_line_color</item>
     </style>
 
 
@@ -108,7 +108,7 @@
         <item name="android:background">@drawable/module_option_items</item>
         <item name="android:clickable">true</item>
         <item name="android:padding">10dp</item>
-        <item name="android:textColor">@color/module_option_item_name_color</item>
+        <item name="android:textColor">@color/option_item_name_color</item>
         <item name="android:textSize">16sp</item>
     </style>
 
@@ -137,6 +137,13 @@
     </style>
     <!--base theme light-->
     <style name="Base.App.Theme.Light" parent="@style/Theme.AppCompat.Light"/>
+
+    <!-- func -->
+    <style name="func_img">
+        <item name="android:layout_width">55dp</item>
+        <item name="android:layout_height">55dp</item>
+        <item name="android:layout_centerInParent">true</item>
+    </style>
 
 
 

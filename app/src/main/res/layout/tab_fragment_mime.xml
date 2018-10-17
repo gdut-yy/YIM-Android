@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:layout_marginTop="15dp"
-        android:background="@color/module_option_item_normal_color"
+        android:background="@color/option_item_normal_color"
         android:gravity="center_vertical">
 
         <ImageView
@@ -26,7 +26,7 @@
             android:layout_width="0dp"
             android:layout_height="80dp"
             android:layout_weight="1"
-            android:background="@color/module_option_item_normal_color"
+            android:background="@color/option_item_normal_color"
             android:gravity="center_vertical"
             android:orientation="vertical">
 
@@ -37,7 +37,7 @@
                 android:layout_marginBottom="5dp"
                 android:singleLine="true"
                 android:text="张逸扬"
-                android:textColor="@color/module_option_item_name_color"
+                android:textColor="@color/option_item_name_color"
                 android:textSize="16sp" />
 
             <TextView
@@ -47,7 +47,7 @@
                 android:layout_marginTop="3dp"
                 android:singleLine="true"
                 android:text="微信号：qq461625996"
-                android:textColor="@color/module_option_item_content_color"
+                android:textColor="@color/option_item_content_color"
                 android:textSize="14sp" />
         </LinearLayout>
 

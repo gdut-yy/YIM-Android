@@ -3,9 +3,9 @@
     <!--<color name="colorPrimary">#3F51B5</color>-->
     <!--<color name="colorPrimaryDark">#303F9F</color>-->
     <!--<color name="colorAccent">#FF4081</color>-->
-    <color name="colorPrimary">@color/module_top_bar_background_color</color>
-    <color name="colorPrimaryDark">@color/module_top_bar_background_color</color>
-    <color name="colorAccent">@color/module_bottom_bar_pressed_color</color>
+    <color name="colorPrimary">@color/toolbar_background_color</color>
+    <color name="colorPrimaryDark">@color/toolbar_background_color</color>
+    <color name="colorAccent">@color/bottom_bar_pressed_color</color>
 
 
     <color name="btn_register_normal">#ffffff</color>

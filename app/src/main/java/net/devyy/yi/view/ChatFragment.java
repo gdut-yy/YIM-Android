@@ -1,8 +1,10 @@
 package net.devyy.yi.view;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -14,7 +16,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.hyphenate.EMCallBack;
@@ -25,6 +29,10 @@ import com.hyphenate.chat.EMMessage;
 import com.hyphenate.chat.EMTextMessageBody;
 
 import net.devyy.yi.R;
+import net.devyy.yi.emoticon.EmoticonKeyBoard;
+import net.devyy.yi.emoticon.EmoticonLayout;
+import net.devyy.yi.emoticon.IEmotionExtClickListener;
+import net.devyy.yi.emoticon.IEmotionSelectedListener;
 import net.devyy.yi.test.ChatTest;
 
 import java.util.LinkedList;
@@ -36,19 +44,26 @@ import java.util.List;
 public class ChatFragment extends Fragment {
 
     private static final String TAG = "ChatFragment";
-
     private static final String TO_USER_NAME = "kolzb002";
-
     private static final String CHAT_BEAN = "chat_bean";
 
     private RecyclerView mRecyclerView;
     private ChatAdapter mAdapter;
+    Handler handler = new Handler();
 
+    // 底部输入框
     private ImageView ivVoice;
     private EditText etInput;
     private ImageView ivEmoji;
     private ImageView ivMore;
     private Button btnSend;
+
+    // 自定义 Emoticon 控件
+    private EmoticonKeyBoard mEmotionKeyboard;
+    private LinearLayout mLlContent;
+    private FrameLayout mFlEmotionView;
+    private EmoticonLayout mElEmotion;
+    private ConstraintLayout mLlMore;
 
     private ChatTest mChat;
     private List<EMMessage> mMessageList = new LinkedList<>();
@@ -66,6 +81,7 @@ public class ChatFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mChat = (ChatTest) getArguments().getSerializable(CHAT_BEAN);
+
     }
 
     @Nullable
@@ -77,7 +93,11 @@ public class ChatFragment extends Fragment {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         bindView(v);
+        bindListener();
+
+        EMClient.getInstance().chatManager().addMessageListener(msgListener);
         updateUI();
+        initEmotionKeyboard();
 
         return v;
     }
@@ -99,12 +119,14 @@ public class ChatFragment extends Fragment {
         ivMore = (ImageView) v.findViewById(R.id.iv_chat_more);
         btnSend = (Button) v.findViewById(R.id.btn_chat_send);
 
-        etInput.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View view, boolean b) {
-                refreshRecyclerView();
-            }
-        });
+        mLlContent = (LinearLayout) v.findViewById(R.id.llContent);
+        mFlEmotionView = (FrameLayout) v.findViewById(R.id.flEmotionView);
+        mElEmotion = (EmoticonLayout) v.findViewById(R.id.elEmotion);
+        mLlMore = (ConstraintLayout) v.findViewById(R.id.llMore);
+    }
+
+    private void bindListener( ) {
+
         etInput.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -130,6 +152,7 @@ public class ChatFragment extends Fragment {
             }
         });
 
+
         // 发送按钮
         btnSend.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -153,7 +176,95 @@ public class ChatFragment extends Fragment {
             }
         });
 
-        EMClient.getInstance().chatManager().addMessageListener(msgListener);
+        mElEmotion.attachEditText(etInput);
+        mElEmotion.setEmotionSelectedListener(new IEmotionSelectedListener() {
+            @Override
+            public void onEmojiSelected(String key) {
+                Log.i(TAG,"onEmojiSelected() 调用");
+            }
+
+            @Override
+            public void onStickerSelected(String categoryName, String stickerName, String stickerBitmapPath) {
+                Log.i(TAG,"onStickerSelected() 调用");
+            }
+        });
+        mElEmotion.setEmotionAddVisiable(true);
+        mElEmotion.setEmotionSettingVisiable(true);
+        mElEmotion.setEmotionExtClickListener(new IEmotionExtClickListener() {
+            @Override
+            public void onEmotionAddClick(View view) {
+                Log.i(TAG,"onEmotionAddClick() 调用");
+            }
+
+            @Override
+            public void onEmotionSettingClick(View view) {
+                Log.i(TAG,"onEmotionSettingClick() 调用");
+            }
+        });
+    }
+
+    private void initEmotionKeyboard( ) {
+        mEmotionKeyboard = EmoticonKeyBoard.with(getActivity());
+        mEmotionKeyboard.bindToEditText(etInput);
+        mEmotionKeyboard.bindToContent(mLlContent);
+        mEmotionKeyboard.setEmotionLayout(mFlEmotionView);
+        mEmotionKeyboard.bindToEmotionButton(ivEmoji, ivMore);
+        mEmotionKeyboard.setOnEmotionButtonOnClickListener(view -> {
+            switch (view.getId()) {
+                case R.id.iv_chat_emoji:
+                    handler.postDelayed(( ) -> mRecyclerView.scrollToPosition(mRecyclerView.getAdapter().getItemCount() - 1), 50);
+
+//                    mRecyclerView.scrollToPosition(mAdapter.getItemCount());
+//                    UIUtils.postTaskDelay(( ) -> mRvMsg.smoothMoveToPosition(mRvMsg.getAdapter().getItemCount() - 1), 50);
+                    etInput.clearFocus();
+                    if (!mElEmotion.isShown()) {
+                        if (mLlMore.isShown()) {
+                            mElEmotion.setVisibility(View.VISIBLE);
+                            ivEmoji.setImageResource(R.drawable.chat_keyboard);
+                            mLlMore.setVisibility(View.GONE);
+//                            showEmotionLayout();
+//                            hideMoreLayout();
+//                            hideAudioButton();
+                            return true;
+                        }
+                    } else if (mElEmotion.isShown() && !mLlMore.isShown()) {
+                        // 置换成键盘按钮
+                        ivEmoji.setImageResource(R.drawable.chat_emoji);
+                        return false;
+                    }
+                    mElEmotion.setVisibility(View.VISIBLE);
+                    ivEmoji.setImageResource(R.drawable.chat_keyboard);
+                    mLlMore.setVisibility(View.GONE);
+//                    showEmotionLayout();
+//                    hideMoreLayout();
+//                    hideAudioButton();
+                    break;
+                case R.id.iv_chat_more:
+                    handler.postDelayed(( ) -> mRecyclerView.scrollToPosition(mRecyclerView.getAdapter().getItemCount() - 1), 50);
+//                    mRecyclerView.scrollToPosition(mAdapter.getItemCount());
+//                    UIUtils.postTaskDelay(( ) -> mRvMsg.smoothMoveToPosition(mRvMsg.getAdapter().getItemCount() - 1), 50);
+                    etInput.clearFocus();
+                    if (!mLlMore.isShown()) {
+                        if (mElEmotion.isShown()) {
+                            mLlMore.setVisibility(View.VISIBLE);
+                            mElEmotion.setVisibility(View.GONE);
+                            ivEmoji.setImageResource(R.drawable.chat_emoji);
+//                            showMoreLayout();
+//                            hideEmotionLayout();
+//                            hideAudioButton();
+                            return true;
+                        }
+                    }
+                    mLlMore.setVisibility(View.VISIBLE);
+                    mElEmotion.setVisibility(View.GONE);
+                    ivEmoji.setImageResource(R.drawable.chat_emoji);
+//                    showMoreLayout();
+//                    hideEmotionLayout();
+//                    hideAudioButton();
+                    break;
+            }
+            return false;
+        });
     }
 
     protected EMCallBack messageStatusCallback = new EMCallBack() {
@@ -182,12 +293,12 @@ public class ChatFragment extends Fragment {
         }
     };
 
-    private void refreshRecyclerView(){
+    private void refreshRecyclerView( ) {
         getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run( ) {
-                mAdapter.notifyItemInserted(mMessageList.size()-1);
-                mRecyclerView.scrollToPosition(mMessageList.size()-1);
+                mAdapter.notifyItemInserted(mMessageList.size() - 1);
+                mRecyclerView.scrollToPosition(mMessageList.size() - 1);
             }
         });
 
@@ -198,7 +309,7 @@ public class ChatFragment extends Fragment {
         public void onMessageReceived(List<EMMessage> messages) {
             // 收到消息
             Log.i(TAG, "收到消息");
-            for (EMMessage emMessage : messages){
+            for (EMMessage emMessage : messages) {
                 mMessageList.add(emMessage);
                 refreshRecyclerView();
             }
@@ -238,7 +349,7 @@ public class ChatFragment extends Fragment {
         }
 
         public void bind(EMMessage message) {
-            String content = ((EMTextMessageBody)message.getBody()).getMessage();
+            String content = ((EMTextMessageBody) message.getBody()).getMessage();
             tvSend.setText(content);
         }
     }
@@ -255,7 +366,7 @@ public class ChatFragment extends Fragment {
         }
 
         public void bind(EMMessage message) {
-            String content = ((EMTextMessageBody)message.getBody()).getMessage();
+            String content = ((EMTextMessageBody) message.getBody()).getMessage();
             tvReceive.setText(content);
         }
     }

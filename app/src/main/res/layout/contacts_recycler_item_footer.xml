@@ -9,7 +9,7 @@
         android:id="@+id/tv_contact_foot"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:textColor="@color/module_option_item_content_color"
+        android:textColor="@color/option_item_content_color"
         android:gravity="center"
         tools:text="N位联系人" />
 
