@@ -36,6 +36,9 @@ public class HomeFragment extends Fragment {
     private List<Fragment> fragments;
     private BottomNavigationBar bottomNavigationBar;
 
+    public static int statusBarHeight;  // 状态栏高度（最顶）
+    public static int titleBarHeight;   // 标题栏高度（次顶）
+
 
     public static HomeFragment newInstance( ) {
         return new HomeFragment();
@@ -46,7 +49,7 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.module_fragment_home, container, false);
 
-        fragments = new ArrayList<>();
+        fragments = new ArrayList<>(4);
         fragments.add(new TabChatsFragment());
         fragments.add(new TabContactsFragment());
         fragments.add(new TabDiscoveryFragment());
@@ -131,6 +134,7 @@ public class HomeFragment extends Fragment {
                 .initialise(); //所有的设置需在调用该方法前完成
 
 
+
         return v;
     }
 
@@ -144,21 +148,21 @@ public class HomeFragment extends Fragment {
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
         inflater.inflate(R.menu.module_top_bar_menu, menu);
+
+        // 获取状态栏高度，标题栏高度，不可移至 onCreateView 内实现
+        statusBarHeight = getResources().getDimensionPixelSize(getResources().getIdentifier("status_bar_height", "dimen", "android"));
+        titleBarHeight = getActivity().getWindow().findViewById(Window.ID_ANDROID_CONTENT).getTop();
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-//        return super.onOptionsItemSelected(item);
         switch (item.getItemId()) {
             case R.id.add:
-                //显示或隐藏popupwindow
+                // 显示或隐藏 popupwindow
                 View menuView = View.inflate(getActivity(), R.layout.module_menu_list, null);
                 View parentView = getActivity().getWindow().findViewById(Window.ID_ANDROID_CONTENT);
-                int titleBarHeight = parentView.getTop();
-                int statusBarHeight = getResources().getDimensionPixelSize(getResources().getIdentifier("status_bar_height", "dimen", "android"));
-                PopupWindow popupWindow = PopupWindowUtils.getPopupWindowAtLocation(menuView, parentView, Gravity.TOP | Gravity.RIGHT, 30, titleBarHeight + statusBarHeight);
+                PopupWindow popupWindow = PopupWindowUtils.getPopupWindowAtLocation(menuView, parentView, Gravity.TOP | Gravity.END, 30, titleBarHeight + statusBarHeight);
 
-//                initPopupWindow(getView());
                 Toast.makeText(getActivity(), "add", Toast.LENGTH_SHORT).show();
                 return super.onOptionsItemSelected(item);
 
@@ -169,14 +173,4 @@ public class HomeFragment extends Fragment {
                 return super.onOptionsItemSelected(item);
         }
     }
-
-    private void initPopupWindow(View parent) {
-        View v = getActivity().getLayoutInflater().inflate(R.layout.module_menu_list, null);
-        PopupWindow popup = new PopupWindow(v, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, true);
-        popup.setFocusable(true);// 该属性设置为true则你在点击屏幕的空白位置也会退出
-        popup.setTouchable(true);
-        popup.setOutsideTouchable(true);
-        popup.showAtLocation(parent, Gravity.CENTER, 0, 0);
-    }
-
 }

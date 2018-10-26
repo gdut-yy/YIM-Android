@@ -107,7 +107,7 @@
         <!--其他功能-->
         <include
             android:id="@+id/llMore"
-            layout="@layout/include_func_layout"
+            layout="@layout/include_extra_keyboard"
             android:visibility="gone" />
     </FrameLayout>
 

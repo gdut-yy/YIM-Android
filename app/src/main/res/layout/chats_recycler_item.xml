@@ -4,9 +4,11 @@
     android:layout_height="wrap_content"
     android:background="@drawable/module_option_items"
     android:clickable="true"
+    android:focusable="true"
     android:orientation="horizontal"
     android:paddingBottom="8dp"
-    android:paddingLeft="10dp"
+    android:paddingStart="10dp"
+    android:paddingEnd="10dp"
     android:paddingTop="8dp">
 
     <ImageView
@@ -18,7 +20,7 @@
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"
         android:layout_weight="1"
         android:gravity="center_vertical"
         android:orientation="vertical">
@@ -46,7 +48,7 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_marginRight="10dp"
+        android:layout_marginEnd="10dp"
         android:gravity="center_vertical"
         android:orientation="vertical">
 

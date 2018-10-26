@@ -40,11 +40,9 @@ public class TabContactsFragment extends Fragment {
     LinearLayoutManager mLinearLayoutManager;
 
 
-
     public TabContactsFragment( ) {
         // Required empty public constructor
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -64,26 +62,9 @@ public class TabContactsFragment extends Fragment {
                 int sectionPosition = mContactAdapter.getSectionPosition(section);
 
                 if (sectionPosition != POSITION_NOT_FOUND) {
-//                    mRrecyclerView.scrollToPosition(mContactAdapter.getItemCount());
-//                    mRrecyclerView.scrollToPosition(sectionPosition);
-////                    mRrecyclerView.smoothScrollToPosition(sectionPosition);
                     mRrecyclerView.scrollToPosition(sectionPosition);
                     mLinearLayoutManager.scrollToPositionWithOffset(sectionPosition, 0);
-
-//                    int firstItem = mLinearLayoutManager.findFirstVisibleItemPosition();
-//                    int lastItem = mLinearLayoutManager.findLastVisibleItemPosition();
-//                    if (sectionPosition <= firstItem) {
-//                        mRrecyclerView.scrollToPosition(sectionPosition);
-//                    } else if (sectionPosition <= lastItem) {
-//                        int top = mRrecyclerView.getChildAt(sectionPosition - firstItem).getTop();
-//                        mRrecyclerView.scrollBy(0, top);
-//                    } else {
-//                        int top = mLinearLayoutManager.findViewByPosition(sectionPosition).getTop();
-//                        mRrecyclerView.scrollBy(0, top);
-//                    }
                 }
-
-
             }
 
             @Override

@@ -55,13 +55,12 @@ public class SettingFragment extends Fragment {
 
             @Override
             public void onSuccess( ) {
-                getActivity().runOnUiThread(new Runnable() {
-                    public void run( ) {
-                        pd.dismiss();
-                        // show login screen
-                        getActivity().finish();
-                        startActivity(new Intent(getActivity(), SplashActivity.class));
-                    }
+                getActivity().runOnUiThread(( ) -> {
+                    pd.dismiss();
+                    // show login screen
+                    getActivity().finish();
+                    startActivity(new Intent(getActivity(), SplashActivity.class));
+
                 });
             }
 
@@ -72,14 +71,9 @@ public class SettingFragment extends Fragment {
 
             @Override
             public void onError(int code, String message) {
-                getActivity().runOnUiThread(new Runnable() {
-
-                    @Override
-                    public void run( ) {
-                        // TODO Auto-generated method stub
-                        pd.dismiss();
-                        Toast.makeText(getActivity(), "unbind devicetokens failed", Toast.LENGTH_SHORT).show();
-                    }
+                getActivity().runOnUiThread(( ) -> {
+                    pd.dismiss();
+                    Toast.makeText(getActivity(), "unbind devicetokens failed", Toast.LENGTH_SHORT).show();
                 });
             }
         });

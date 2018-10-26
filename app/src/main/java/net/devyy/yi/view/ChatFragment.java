@@ -1,10 +1,12 @@
 package net.devyy.yi.view;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
+import android.support.design.widget.AppBarLayout;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -20,6 +22,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.hyphenate.EMCallBack;
 import com.hyphenate.EMMessageListener;
@@ -34,6 +37,7 @@ import net.devyy.yi.emoticon.EmoticonLayout;
 import net.devyy.yi.emoticon.IEmotionExtClickListener;
 import net.devyy.yi.emoticon.IEmotionSelectedListener;
 import net.devyy.yi.test.ChatTest;
+import net.devyy.yi.view.activity.HomeActivity;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -41,7 +45,7 @@ import java.util.List;
 /**
  * "YIM" -> "item" 聊天页面
  */
-public class ChatFragment extends Fragment {
+public class ChatFragment extends Fragment implements View.OnClickListener {
 
     private static final String TAG = "ChatFragment";
     private static final String TO_USER_NAME = "kolzb002";
@@ -50,6 +54,15 @@ public class ChatFragment extends Fragment {
     private RecyclerView mRecyclerView;
     private ChatAdapter mAdapter;
     Handler handler = new Handler();
+
+    private ChatTest mChat;
+    private List<EMMessage> mMessageList = new LinkedList<>();
+
+    // include_toolbar.xml
+    private AppBarLayout appBar;
+    private TextView tvToolbarTitle;
+    private ImageView ivToolbarBack;
+    private ImageView ivToolbarMore;
 
     // 底部输入框
     private ImageView ivVoice;
@@ -65,8 +78,15 @@ public class ChatFragment extends Fragment {
     private EmoticonLayout mElEmotion;
     private ConstraintLayout mLlMore;
 
-    private ChatTest mChat;
-    private List<EMMessage> mMessageList = new LinkedList<>();
+    // include_extra_keyboard.xml
+    private LinearLayout llAlbum;
+    private LinearLayout llCamera;
+    private LinearLayout llVoiceCall;
+    private LinearLayout llLocation;
+    private LinearLayout llRedPacket;
+    private LinearLayout llVoiceInput;
+    private LinearLayout llContactCard;
+    private LinearLayout llFiles;
 
     public static ChatFragment newInstance(ChatTest chat) {
         Bundle args = new Bundle();
@@ -94,6 +114,9 @@ public class ChatFragment extends Fragment {
 
         bindView(v);
         bindListener();
+//        tvToolbarTitle.setText(mChat.getUserName());
+        appBar.setMinimumHeight(HomeFragment.titleBarHeight);
+        tvToolbarTitle.setText(TO_USER_NAME);
 
         EMClient.getInstance().chatManager().addMessageListener(msgListener);
         updateUI();
@@ -105,14 +128,20 @@ public class ChatFragment extends Fragment {
     private void updateUI( ) {
 
         EMConversation conversation = EMClient.getInstance().chatManager().getConversation(TO_USER_NAME);
-//        //获取此会话的所有消息
-//        List<EMMessage> mMessageList = conversation.getAllMessages();
+
+        //获取此会话的所有消息
+        mMessageList = conversation.getAllMessages();
 
         mAdapter = new ChatAdapter(mMessageList);
         mRecyclerView.setAdapter(mAdapter);
     }
 
     private void bindView(View v) {
+        appBar = (AppBarLayout) v.findViewById(R.id.yim_toolbar);
+        tvToolbarTitle = (TextView) v.findViewById(R.id.tv_toolbar_title);
+        ivToolbarBack = (ImageView) v.findViewById(R.id.iv_toolbar_back);
+        ivToolbarMore = (ImageView) v.findViewById(R.id.iv_toolbar_more);
+
         ivVoice = (ImageView) v.findViewById(R.id.iv_chat_voice);
         etInput = (EditText) v.findViewById(R.id.et_chat_input);
         ivEmoji = (ImageView) v.findViewById(R.id.iv_chat_emoji);
@@ -123,9 +152,19 @@ public class ChatFragment extends Fragment {
         mFlEmotionView = (FrameLayout) v.findViewById(R.id.flEmotionView);
         mElEmotion = (EmoticonLayout) v.findViewById(R.id.elEmotion);
         mLlMore = (ConstraintLayout) v.findViewById(R.id.llMore);
+
+        llAlbum = (LinearLayout) v.findViewById(R.id.rl_album);
+        llCamera = (LinearLayout) v.findViewById(R.id.rl_camera);
+        llVoiceCall = (LinearLayout) v.findViewById(R.id.rl_voice_call);
+        llLocation = (LinearLayout) v.findViewById(R.id.rl_location);
+        llRedPacket = (LinearLayout) v.findViewById(R.id.rl_red_packet);
+        llVoiceInput = (LinearLayout) v.findViewById(R.id.rl_voice_input);
+        llContactCard = (LinearLayout) v.findViewById(R.id.rl_contact_card);
+        llFiles = (LinearLayout) v.findViewById(R.id.rl_files);
     }
 
     private void bindListener( ) {
+        ivToolbarBack.setOnClickListener(this);
 
         etInput.addTextChangedListener(new TextWatcher() {
             @Override
@@ -152,40 +191,19 @@ public class ChatFragment extends Fragment {
             }
         });
 
-
         // 发送按钮
-        btnSend.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String input = etInput.getText().toString().trim();
-                //创建一条文本消息，content为消息文字内容，toChatUsername为对方用户或者群聊的id，后文皆是如此
-                EMMessage message = EMMessage.createTxtSendMessage(input, TO_USER_NAME);
-//                //如果是群聊，设置chattype，默认是单聊
-//                if (chatType == CHATTYPE_GROUP)
-//                    message.setChatType(ChatType.GroupChat);
-
-                message.setMessageStatusCallback(messageStatusCallback);
-
-                //发送消息
-                EMClient.getInstance().chatManager().sendMessage(message);
-                etInput.setText("");
-
-                mMessageList.add(message);
-                refreshRecyclerView();
-
-            }
-        });
+        btnSend.setOnClickListener(this);
 
         mElEmotion.attachEditText(etInput);
         mElEmotion.setEmotionSelectedListener(new IEmotionSelectedListener() {
             @Override
             public void onEmojiSelected(String key) {
-                Log.i(TAG,"onEmojiSelected() 调用");
+                Log.i(TAG, "onEmojiSelected() 调用");
             }
 
             @Override
             public void onStickerSelected(String categoryName, String stickerName, String stickerBitmapPath) {
-                Log.i(TAG,"onStickerSelected() 调用");
+                Log.i(TAG, "onStickerSelected() 调用");
             }
         });
         mElEmotion.setEmotionAddVisiable(true);
@@ -193,14 +211,23 @@ public class ChatFragment extends Fragment {
         mElEmotion.setEmotionExtClickListener(new IEmotionExtClickListener() {
             @Override
             public void onEmotionAddClick(View view) {
-                Log.i(TAG,"onEmotionAddClick() 调用");
+                Log.i(TAG, "onEmotionAddClick() 调用");
             }
 
             @Override
             public void onEmotionSettingClick(View view) {
-                Log.i(TAG,"onEmotionSettingClick() 调用");
+                Log.i(TAG, "onEmotionSettingClick() 调用");
             }
         });
+
+        llAlbum.setOnClickListener(this);
+        llCamera.setOnClickListener(this);
+        llVoiceCall.setOnClickListener(this);
+        llLocation.setOnClickListener(this);
+        llRedPacket.setOnClickListener(this);
+        llVoiceInput.setOnClickListener(this);
+        llContactCard.setOnClickListener(this);
+        llFiles.setOnClickListener(this);
     }
 
     private void initEmotionKeyboard( ) {
@@ -213,18 +240,12 @@ public class ChatFragment extends Fragment {
             switch (view.getId()) {
                 case R.id.iv_chat_emoji:
                     handler.postDelayed(( ) -> mRecyclerView.scrollToPosition(mRecyclerView.getAdapter().getItemCount() - 1), 50);
-
-//                    mRecyclerView.scrollToPosition(mAdapter.getItemCount());
-//                    UIUtils.postTaskDelay(( ) -> mRvMsg.smoothMoveToPosition(mRvMsg.getAdapter().getItemCount() - 1), 50);
                     etInput.clearFocus();
                     if (!mElEmotion.isShown()) {
                         if (mLlMore.isShown()) {
                             mElEmotion.setVisibility(View.VISIBLE);
                             ivEmoji.setImageResource(R.drawable.chat_keyboard);
                             mLlMore.setVisibility(View.GONE);
-//                            showEmotionLayout();
-//                            hideMoreLayout();
-//                            hideAudioButton();
                             return true;
                         }
                     } else if (mElEmotion.isShown() && !mLlMore.isShown()) {
@@ -235,32 +256,21 @@ public class ChatFragment extends Fragment {
                     mElEmotion.setVisibility(View.VISIBLE);
                     ivEmoji.setImageResource(R.drawable.chat_keyboard);
                     mLlMore.setVisibility(View.GONE);
-//                    showEmotionLayout();
-//                    hideMoreLayout();
-//                    hideAudioButton();
                     break;
                 case R.id.iv_chat_more:
                     handler.postDelayed(( ) -> mRecyclerView.scrollToPosition(mRecyclerView.getAdapter().getItemCount() - 1), 50);
-//                    mRecyclerView.scrollToPosition(mAdapter.getItemCount());
-//                    UIUtils.postTaskDelay(( ) -> mRvMsg.smoothMoveToPosition(mRvMsg.getAdapter().getItemCount() - 1), 50);
                     etInput.clearFocus();
                     if (!mLlMore.isShown()) {
                         if (mElEmotion.isShown()) {
                             mLlMore.setVisibility(View.VISIBLE);
                             mElEmotion.setVisibility(View.GONE);
                             ivEmoji.setImageResource(R.drawable.chat_emoji);
-//                            showMoreLayout();
-//                            hideEmotionLayout();
-//                            hideAudioButton();
                             return true;
                         }
                     }
                     mLlMore.setVisibility(View.VISIBLE);
                     mElEmotion.setVisibility(View.GONE);
                     ivEmoji.setImageResource(R.drawable.chat_emoji);
-//                    showMoreLayout();
-//                    hideEmotionLayout();
-//                    hideAudioButton();
                     break;
             }
             return false;
@@ -294,14 +304,10 @@ public class ChatFragment extends Fragment {
     };
 
     private void refreshRecyclerView( ) {
-        getActivity().runOnUiThread(new Runnable() {
-            @Override
-            public void run( ) {
-                mAdapter.notifyItemInserted(mMessageList.size() - 1);
-                mRecyclerView.scrollToPosition(mMessageList.size() - 1);
-            }
+        getActivity().runOnUiThread(( ) -> {
+            mAdapter.notifyItemInserted(mMessageList.size() - 1);
+            mRecyclerView.scrollToPosition(mMessageList.size() - 1);
         });
-
     }
 
     private EMMessageListener msgListener = new EMMessageListener() {
@@ -335,6 +341,60 @@ public class ChatFragment extends Fragment {
             Log.i(TAG, "消息状态变动");
         }
     };
+
+    @Override
+    public void onClick(View view) {
+        int id = view.getId();
+        switch (id) {
+            case R.id.iv_toolbar_back:
+                Intent intent = new Intent(getActivity(), HomeActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+                getActivity().finish();
+                break;
+            case R.id.iv_toolbar_more:
+                Toast.makeText(getActivity(), "聊天信息页面（待实现）", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.btn_chat_send:
+                String input = etInput.getText().toString().trim();
+                //创建一条文本消息，content为消息文字内容，toChatUsername为对方用户或者群聊的id，后文皆是如此
+                EMMessage message = EMMessage.createTxtSendMessage(input, TO_USER_NAME);
+//                //如果是群聊，设置chattype，默认是单聊
+//                if (chatType == CHATTYPE_GROUP)
+//                    message.setChatType(ChatType.GroupChat);
+                message.setMessageStatusCallback(messageStatusCallback);
+                //发送消息
+                EMClient.getInstance().chatManager().sendMessage(message);
+                etInput.setText("");
+                mMessageList.add(message);
+                refreshRecyclerView();
+                break;
+            case R.id.rl_album:
+                Log.i(TAG, "点击 “相册”");
+                break;
+            case R.id.rl_camera:
+                Log.i(TAG, "点击 “拍摄”");
+                break;
+            case R.id.rl_voice_call:
+                Log.i(TAG, "点击 “视频通话”");
+                break;
+            case R.id.rl_location:
+                Log.i(TAG, "点击 “位置”");
+                break;
+            case R.id.rl_red_packet:
+                Log.i(TAG, "点击 “红包");
+                break;
+            case R.id.rl_voice_input:
+                Log.i(TAG, "点击 “语音输入”");
+                break;
+            case R.id.rl_contact_card:
+                Log.i(TAG, "点击 “名片”");
+                break;
+            case R.id.rl_files:
+                Log.i(TAG, "点击 “文件”");
+                break;
+        }
+    }
 
 
     // 发送消息内部类

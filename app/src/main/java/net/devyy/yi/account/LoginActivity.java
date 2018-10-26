@@ -14,7 +14,6 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.hyphenate.EMCallBack;
@@ -72,17 +71,14 @@ public class LoginActivity extends Activity {
             }
         });
 
-        passwordEditText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if (actionId == EditorInfo.IME_ACTION_DONE
-                        || ((event.getKeyCode() == KeyEvent.KEYCODE_ENTER)
-                        && (event.getAction() == KeyEvent.ACTION_DOWN))) {
-                    login(null);
-                    return true;
-                } else {
-                    return false;
-                }
+        passwordEditText.setOnEditorActionListener((v, actionId, event) -> {
+            if (actionId == EditorInfo.IME_ACTION_DONE
+                    || ((event.getKeyCode() == KeyEvent.KEYCODE_ENTER)
+                    && (event.getAction() == KeyEvent.ACTION_DOWN))) {
+                login(null);
+                return true;
+            } else {
+                return false;
             }
         });
     }
@@ -178,12 +174,11 @@ public class LoginActivity extends Activity {
                 if (!progressShow) {
                     return;
                 }
-                runOnUiThread(new Runnable() {
-                    public void run( ) {
-                        pd.dismiss();
-                        Toast.makeText(getApplicationContext(), "登录失败：" + message,
-                                Toast.LENGTH_SHORT).show();
-                    }
+                runOnUiThread(( ) -> {
+                    pd.dismiss();
+                    Toast.makeText(getApplicationContext(), "登录失败：" + message,
+                            Toast.LENGTH_SHORT).show();
+
                 });
             }
         });

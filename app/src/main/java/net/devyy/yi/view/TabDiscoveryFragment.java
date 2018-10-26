@@ -16,8 +16,6 @@ import net.devyy.yi.R;
  */
 public class TabDiscoveryFragment extends Fragment {
 
-//    private Button mButton;
-
     public TabDiscoveryFragment( ) {
         // Required empty public constructor
     }
@@ -25,18 +23,7 @@ public class TabDiscoveryFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.tab_fragment_discovery, container, false);
-
-//        mButton = (Button) v.findViewById(R.id.bt_github);
-
-//        mButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent i = WebViewActivity.newIntent(getActivity(), Uri.parse("https://github.com/gdut-yy"));
-//                startActivity(i);
-//            }
-//        });
 
         return v;
     }

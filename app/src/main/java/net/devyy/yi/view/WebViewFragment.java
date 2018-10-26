@@ -46,7 +46,7 @@ public class WebViewFragment extends Fragment {
         View v = inflater.inflate(R.layout.module_fragment_webview, container, false);
 
         mWebView = (WebView) v.findViewById(R.id.web_view);
-        mWebView.getSettings().setJavaScriptEnabled(true);
+//        mWebView.getSettings().setJavaScriptEnabled(true);
         mWebView.setWebViewClient(new WebViewClient());
         mWebView.loadUrl(mUri.toString());
 

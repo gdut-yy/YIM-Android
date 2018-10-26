@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
@@ -64,45 +63,38 @@ public class RegisterActivity extends Activity {
             pd.setMessage("注册ing……");
             pd.show();
 
-            new Thread(new Runnable() {
-                public void run() {
-                    try {
-                        // call method in SDK
-                        EMClient.getInstance().createAccount(username, pwd);
-                        runOnUiThread(new Runnable() {
-                            public void run() {
-                                if (!RegisterActivity.this.isFinishing())
-                                    pd.dismiss();
-                                // save current user
-                                YIMHelper.getInstance().setCurrentUserName(username);
-                                Toast.makeText(getApplicationContext(), "注册成功!", Toast.LENGTH_SHORT).show();
-                                finish();
-                            }
-                        });
-                    } catch (final HyphenateException e) {
-                        runOnUiThread(new Runnable() {
-                            public void run() {
-                                if (!RegisterActivity.this.isFinishing())
-                                    pd.dismiss();
-                                int errorCode=e.getErrorCode();
-                                if(errorCode== EMError.NETWORK_ERROR){
-                                    Toast.makeText(getApplicationContext(), "网络不可用", Toast.LENGTH_SHORT).show();
-                                }else if(errorCode == EMError.USER_ALREADY_EXIST){
-                                    Toast.makeText(getApplicationContext(), "用户名已经存在", Toast.LENGTH_SHORT).show();
-                                }else if(errorCode == EMError.USER_AUTHENTICATION_FAILED){
-                                    Toast.makeText(getApplicationContext(), "无权限注册", Toast.LENGTH_SHORT).show();
-                                }else if(errorCode == EMError.USER_ILLEGAL_ARGUMENT){
-                                    Toast.makeText(getApplicationContext(), "非法用户名",Toast.LENGTH_SHORT).show();
-                                }
-//                                else if(errorCode == EMError.EXCEED_SERVICE_LIMIT){
-//                                    Toast.makeText(RegisterActivity.this, getResources().getString(R.string.register_exceed_service_limit), Toast.LENGTH_SHORT).show();
-//                                }
-                                else{
-                                    Toast.makeText(getApplicationContext(), "注册失败", Toast.LENGTH_SHORT).show();
-                                }
-                            }
-                        });
-                    }
+            new Thread(( ) -> {
+                try {
+                    // call method in SDK
+                    EMClient.getInstance().createAccount(username, pwd);
+                    runOnUiThread(( ) -> {
+                        if (!RegisterActivity.this.isFinishing())
+                            pd.dismiss();
+                        // save current user
+                        YIMHelper.getInstance().setCurrentUserName(username);
+                        Toast.makeText(getApplicationContext(), "注册成功!", Toast.LENGTH_SHORT).show();
+                        finish();
+
+                    });
+                } catch (final HyphenateException e) {
+                    runOnUiThread(( ) -> {
+                        if (!RegisterActivity.this.isFinishing())
+                            pd.dismiss();
+                        int errorCode = e.getErrorCode();
+                        if (errorCode == EMError.NETWORK_ERROR) {
+                            Toast.makeText(getApplicationContext(), "网络不可用", Toast.LENGTH_SHORT).show();
+                        } else if (errorCode == EMError.USER_ALREADY_EXIST) {
+                            Toast.makeText(getApplicationContext(), "用户名已经存在", Toast.LENGTH_SHORT).show();
+                        } else if (errorCode == EMError.USER_AUTHENTICATION_FAILED) {
+                            Toast.makeText(getApplicationContext(), "无权限注册", Toast.LENGTH_SHORT).show();
+                        } else if (errorCode == EMError.USER_ILLEGAL_ARGUMENT) {
+                            Toast.makeText(getApplicationContext(), "非法用户名", Toast.LENGTH_SHORT).show();
+                        }
+                        else {
+                            Toast.makeText(getApplicationContext(), "注册失败", Toast.LENGTH_SHORT).show();
+                        }
+
+                    });
                 }
             }).start();
 

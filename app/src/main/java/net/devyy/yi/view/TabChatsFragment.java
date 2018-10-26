@@ -29,16 +29,6 @@ public class TabChatsFragment extends Fragment {
 
     private RecyclerView recyclerView;
     private ChatAdapter chatAdapter;
-//    private List<Conversation> conversationList = new LinkedList<>();
-//    private ConversationAdapter adapter;
-//    private ListView listView;
-
-//    private ConversationPresenter presenter;
-//    private FriendshipManagerPresenter friendshipManagerPresenter;
-//    private GroupManagerPresenter groupManagerPresenter;
-//    private List<String> groupList;
-//    private FriendshipConversation friendshipConversation;
-//    private GroupManageConversation groupManageConversation;
 
     public TabChatsFragment( ) {
         // Required empty public constructor

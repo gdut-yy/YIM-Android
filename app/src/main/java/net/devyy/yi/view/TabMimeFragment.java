@@ -17,7 +17,7 @@ import net.devyy.yi.view.activity.WebViewActivity;
 /**
  * "我" 页面
  */
-public class TabMimeFragment extends Fragment {
+public class TabMimeFragment extends Fragment implements View.OnClickListener {
 
     private LinearLayout llSetting;
     private LinearLayout llCSDN;
@@ -38,37 +38,34 @@ public class TabMimeFragment extends Fragment {
         llGitee = (LinearLayout) v.findViewById(R.id.ll_gitee);
         llGithub = (LinearLayout) v.findViewById(R.id.ll_github);
 
-        llSetting.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(getActivity(), SettingActivity.class);
-                startActivity(i);
-            }
-        });
-        llCSDN.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = WebViewActivity.newIntent(getActivity(), Uri.parse("https://blog.csdn.net/gdut_yy"));
-                startActivity(i);
-            }
-        });
-
-        llGitee.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = WebViewActivity.newIntent(getActivity(), Uri.parse("https://gitee.com/gdut_yy"));
-                startActivity(i);
-            }
-        });
-        llGithub.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = WebViewActivity.newIntent(getActivity(), Uri.parse("https://github.com//gdut-yy"));
-                startActivity(i);
-            }
-        });
+        llSetting.setOnClickListener(this);
+        llCSDN.setOnClickListener(this);
+        llGitee.setOnClickListener(this);
+        llGithub.setOnClickListener(this);
 
         return v;
     }
 
+    @Override
+    public void onClick(View view) {
+        Intent i;
+        switch (view.getId()) {
+            case R.id.ll_shezhi:
+                i = new Intent(getActivity(), SettingActivity.class);
+                startActivity(i);
+                break;
+            case R.id.ll_csdn:
+                i = WebViewActivity.newIntent(getActivity(), Uri.parse("https://blog.csdn.net/gdut_yy"));
+                startActivity(i);
+                break;
+            case R.id.ll_gitee:
+                i = WebViewActivity.newIntent(getActivity(), Uri.parse("https://gitee.com/gdut_yy"));
+                startActivity(i);
+                break;
+            case R.id.ll_github:
+                i = WebViewActivity.newIntent(getActivity(), Uri.parse("https://github.com//gdut-yy"));
+                startActivity(i);
+                break;
+        }
+    }
 }
