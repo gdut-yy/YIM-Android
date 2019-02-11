@@ -23,9 +23,9 @@
     <application
         android:name=".YIMApplication"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_yim"
+        android:icon="@mipmap/ic_yim_android"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_yim"
+        android:roundIcon="@mipmap/ic_yim_android"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 

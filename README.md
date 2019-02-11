@@ -109,3 +109,7 @@ YIM 主要分为四大模块。应用启动后先加载Splash页，然后判断�
 [15] 泛聊开源项目：https://github.com/uncleleonfan/FanChat
 [16] 汉字转拼音库：https://github.com/promeG/TinyPinyin
 ```
+
+## 相关链接：[YIM-Flutter版客户端（传送门）]()（2019-06-30 后正式开源）
+
+![](readme/ic_yim_flutter.png)

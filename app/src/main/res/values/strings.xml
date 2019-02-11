@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">YIM</string>
+    <string name="app_name">YIM_Android</string>
     <string name="app_version_text">个人专业设计版 v1.0.2</string>
 
     <!-- 菜单栏 -->
