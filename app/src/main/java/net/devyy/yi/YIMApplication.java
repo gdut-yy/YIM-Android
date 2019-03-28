@@ -11,7 +11,7 @@ import net.devyy.yi.emoticon.EmotionKit;
 /**
  * YIMApplication，初始化 环信SDK
  */
-public class YIMApplication extends Application {
+public class    YIMApplication extends Application {
 
     public static Context applicationContext;
     private static YIMApplication instance;

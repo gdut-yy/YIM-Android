@@ -125,12 +125,15 @@ public class ChatFragment extends Fragment implements View.OnClickListener {
         return v;
     }
 
-    private void updateUI( ) {
+    private void updateUI() {
 
         EMConversation conversation = EMClient.getInstance().chatManager().getConversation(TO_USER_NAME);
 
         //获取此会话的所有消息
-        mMessageList = conversation.getAllMessages();
+        if (null != conversation && null != conversation.getAllMessages()) {
+            mMessageList = conversation.getAllMessages();
+        }
+
 
         mAdapter = new ChatAdapter(mMessageList);
         mRecyclerView.setAdapter(mAdapter);
@@ -163,7 +166,7 @@ public class ChatFragment extends Fragment implements View.OnClickListener {
         llFiles = (LinearLayout) v.findViewById(R.id.rl_files);
     }
 
-    private void bindListener( ) {
+    private void bindListener() {
         ivToolbarBack.setOnClickListener(this);
 
         etInput.addTextChangedListener(new TextWatcher() {
@@ -230,7 +233,7 @@ public class ChatFragment extends Fragment implements View.OnClickListener {
         llFiles.setOnClickListener(this);
     }
 
-    private void initEmotionKeyboard( ) {
+    private void initEmotionKeyboard() {
         mEmotionKeyboard = EmoticonKeyBoard.with(getActivity());
         mEmotionKeyboard.bindToEditText(etInput);
         mEmotionKeyboard.bindToContent(mLlContent);
@@ -239,7 +242,7 @@ public class ChatFragment extends Fragment implements View.OnClickListener {
         mEmotionKeyboard.setOnEmotionButtonOnClickListener(view -> {
             switch (view.getId()) {
                 case R.id.iv_chat_emoji:
-                    handler.postDelayed(( ) -> mRecyclerView.scrollToPosition(mRecyclerView.getAdapter().getItemCount() - 1), 50);
+                    handler.postDelayed(() -> mRecyclerView.scrollToPosition(mRecyclerView.getAdapter().getItemCount() - 1), 50);
                     etInput.clearFocus();
                     if (!mElEmotion.isShown()) {
                         if (mLlMore.isShown()) {
@@ -258,7 +261,7 @@ public class ChatFragment extends Fragment implements View.OnClickListener {
                     mLlMore.setVisibility(View.GONE);
                     break;
                 case R.id.iv_chat_more:
-                    handler.postDelayed(( ) -> mRecyclerView.scrollToPosition(mRecyclerView.getAdapter().getItemCount() - 1), 50);
+                    handler.postDelayed(() -> mRecyclerView.scrollToPosition(mRecyclerView.getAdapter().getItemCount() - 1), 50);
                     etInput.clearFocus();
                     if (!mLlMore.isShown()) {
                         if (mElEmotion.isShown()) {
@@ -279,7 +282,7 @@ public class ChatFragment extends Fragment implements View.OnClickListener {
 
     protected EMCallBack messageStatusCallback = new EMCallBack() {
         @Override
-        public void onSuccess( ) {
+        public void onSuccess() {
             Log.i(TAG, "发送成功");
 //            if(isMessageListInited) {
 //                messageList.refresh();
@@ -303,8 +306,8 @@ public class ChatFragment extends Fragment implements View.OnClickListener {
         }
     };
 
-    private void refreshRecyclerView( ) {
-        getActivity().runOnUiThread(( ) -> {
+    private void refreshRecyclerView() {
+        getActivity().runOnUiThread(() -> {
             mAdapter.notifyItemInserted(mMessageList.size() - 1);
             mRecyclerView.scrollToPosition(mMessageList.size() - 1);
         });
@@ -334,6 +337,11 @@ public class ChatFragment extends Fragment implements View.OnClickListener {
         @Override
         public void onMessageDelivered(List<EMMessage> messages) {
             Log.i(TAG, "收到已送达回执");
+        }
+
+        @Override
+        public void onMessageRecalled(List<EMMessage> messages) {
+
         }
 
         @Override
@@ -477,13 +485,13 @@ public class ChatFragment extends Fragment implements View.OnClickListener {
         }
 
         @Override
-        public int getItemCount( ) {
+        public int getItemCount() {
             return mEmMessages.size();
         }
     }
 
     @Override
-    public void onDestroy( ) {
+    public void onDestroy() {
         super.onDestroy();
         EMClient.getInstance().chatManager().removeMessageListener(msgListener);
     }
