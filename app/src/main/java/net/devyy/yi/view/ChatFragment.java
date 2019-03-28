@@ -32,6 +32,7 @@ import com.hyphenate.chat.EMMessage;
 import com.hyphenate.chat.EMTextMessageBody;
 
 import net.devyy.yi.R;
+import net.devyy.yi.YIMHelper;
 import net.devyy.yi.emoticon.EmoticonKeyBoard;
 import net.devyy.yi.emoticon.EmoticonLayout;
 import net.devyy.yi.emoticon.IEmotionExtClickListener;
@@ -48,7 +49,8 @@ import java.util.List;
 public class ChatFragment extends Fragment implements View.OnClickListener {
 
     private static final String TAG = "ChatFragment";
-    private static final String TO_USER_NAME = "kolzb002";
+    private static final String KOLZB001 = "kolzb001";
+    private static final String KOLZB002 = "kolzb002";
     private static final String CHAT_BEAN = "chat_bean";
 
     private RecyclerView mRecyclerView;
@@ -88,6 +90,8 @@ public class ChatFragment extends Fragment implements View.OnClickListener {
     private LinearLayout llContactCard;
     private LinearLayout llFiles;
 
+    private String toUserName;
+
     public static ChatFragment newInstance(ChatTest chat) {
         Bundle args = new Bundle();
         args.putSerializable(CHAT_BEAN, chat);
@@ -101,7 +105,11 @@ public class ChatFragment extends Fragment implements View.OnClickListener {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mChat = (ChatTest) getArguments().getSerializable(CHAT_BEAN);
-
+        if (YIMHelper.getInstance().getCurrentUsernName().equals(KOLZB001)) {
+            toUserName = KOLZB002;
+        } else {
+            toUserName = KOLZB001;
+        }
     }
 
     @Nullable
@@ -116,7 +124,7 @@ public class ChatFragment extends Fragment implements View.OnClickListener {
         bindListener();
 //        tvToolbarTitle.setText(mChat.getUserName());
         appBar.setMinimumHeight(HomeFragment.titleBarHeight);
-        tvToolbarTitle.setText(TO_USER_NAME);
+        tvToolbarTitle.setText(toUserName);
 
         EMClient.getInstance().chatManager().addMessageListener(msgListener);
         updateUI();
@@ -127,7 +135,7 @@ public class ChatFragment extends Fragment implements View.OnClickListener {
 
     private void updateUI() {
 
-        EMConversation conversation = EMClient.getInstance().chatManager().getConversation(TO_USER_NAME);
+        EMConversation conversation = EMClient.getInstance().chatManager().getConversation(toUserName);
 
         //获取此会话的所有消息
         if (null != conversation && null != conversation.getAllMessages()) {
@@ -366,7 +374,7 @@ public class ChatFragment extends Fragment implements View.OnClickListener {
             case R.id.btn_chat_send:
                 String input = etInput.getText().toString().trim();
                 //创建一条文本消息，content为消息文字内容，toChatUsername为对方用户或者群聊的id，后文皆是如此
-                EMMessage message = EMMessage.createTxtSendMessage(input, TO_USER_NAME);
+                EMMessage message = EMMessage.createTxtSendMessage(input, toUserName);
 //                //如果是群聊，设置chattype，默认是单聊
 //                if (chatType == CHATTYPE_GROUP)
 //                    message.setChatType(ChatType.GroupChat);
