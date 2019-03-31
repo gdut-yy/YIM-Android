@@ -27,11 +27,11 @@ public class YIMHelper {
      */
     private static YIMHelper instance = null;
 
-    private YIMHelper( ) {
+    private YIMHelper() {
         executor = Executors.newCachedThreadPool();
     }
 
-    public synchronized static YIMHelper getInstance( ) {
+    public synchronized static YIMHelper getInstance() {
         if (instance == null) {
             instance = new YIMHelper();
         }
@@ -64,11 +64,11 @@ public class YIMHelper {
      *
      * @return
      */
-    public boolean isLoggedIn( ) {
+    public boolean isLoggedIn() {
         return EMClient.getInstance().isLoggedInBefore();
     }
 
-    private String username;
+    private String username = "";
 
     /**
      * set current username
@@ -82,7 +82,7 @@ public class YIMHelper {
     /**
      * get current user's id
      */
-    public String getCurrentUsernName( ) {
+    public String getCurrentUsernName() {
         return username;
     }
 
@@ -117,10 +117,8 @@ public class YIMHelper {
     /**
      * logout
      *
-     * @param unbindDeviceToken
-     *            whether you need unbind your device token
-     * @param callback
-     *            callback
+     * @param unbindDeviceToken whether you need unbind your device token
+     * @param callback          callback
      */
     public void logout(boolean unbindDeviceToken, final EMCallBack callback) {
         endCall();
@@ -154,6 +152,7 @@ public class YIMHelper {
             }
         });
     }
+
     void endCall() {
         try {
             EMClient.getInstance().callManager().endCall();

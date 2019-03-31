@@ -32,7 +32,11 @@ public class SingletonData {
     private SingletonData(Context context) {
 
         chats = new ArrayList<>();
-        for (int i = 1; i <= 100; i++) {
+        ChatTest chat1 = new ChatTest("kolzb001", "Message #", "00:50");
+        chats.add(chat1);
+        ChatTest chat2 = new ChatTest("kolzb002", "Message #", "00:50");
+        chats.add(chat2);
+        for (int i = 1; i <= 50; i++) {
             ChatTest chat = new ChatTest("ChatTest #" + i, "Message #" + i, "00:50");
             chats.add(chat);
         }

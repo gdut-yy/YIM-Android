@@ -49,8 +49,6 @@ import java.util.List;
 public class ChatFragment extends Fragment implements View.OnClickListener {
 
     private static final String TAG = "ChatFragment";
-    private static final String KOLZB001 = "kolzb001";
-    private static final String KOLZB002 = "kolzb002";
     private static final String CHAT_BEAN = "chat_bean";
 
     private RecyclerView mRecyclerView;
@@ -105,11 +103,8 @@ public class ChatFragment extends Fragment implements View.OnClickListener {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mChat = (ChatTest) getArguments().getSerializable(CHAT_BEAN);
-        if (YIMHelper.getInstance().getCurrentUsernName().equals(KOLZB001)) {
-            toUserName = KOLZB002;
-        } else {
-            toUserName = KOLZB001;
-        }
+
+        toUserName = mChat.getUserName();
     }
 
     @Nullable
